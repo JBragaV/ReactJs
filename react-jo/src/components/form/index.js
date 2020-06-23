@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import ValidatorForm from '../../shared/validators';
+import MeuPopUp from '../../shared/popup';
+
 const Formulario = props =>{
     
     const [dados, setDados] = useState({
@@ -14,15 +17,22 @@ const Formulario = props =>{
     }
 
     function Adiconando(dados){
-        props.adcionar(dados);
-        setDados({
-            nome: '',
-            livro: '',
-            preco: ''
-        })
+        const valid = new ValidatorForm();
+        if(valid.valida(dados)){
+            props.adcionar(dados);
+            setDados({
+                nome: '',
+                livro: '',
+                preco: ''
+            })
+            MeuPopUp.exibeMensagem('success', "Dados cadastrados com sucesso!!!")
+        }else{
+            valid.errosArray().forEach(erro => {
+                MeuPopUp.exibeMensagem('error', erro.mensagem)
+            })
+        }
     }
     
-
     return(
         <form >
             <label htmlFor="nome">Nome</label>

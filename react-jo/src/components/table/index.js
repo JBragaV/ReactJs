@@ -4,6 +4,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 import TableRow from './tables-row';
 import Formulario from '../form';
+import MeuPopUp from '../../shared/popup';
 
 class Tabela extends Component{
     state = {
@@ -21,7 +22,8 @@ class Tabela extends Component{
             dadosTabela: dadosTabela.filter((autor, pos)=>{
                 return index !== pos;
             }),
-        })        
+        })
+        MeuPopUp.exibeMensagem("delete", "Dados apagado com sucesso!!!");        
       }
 
       add = (dados)=>{
