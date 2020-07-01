@@ -3,6 +3,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import HomePage from '../pages/home'
 import SobrePage from '../pages/sobre';
+import Jocimar from '../pages/jocimar';
+import Dadada from '../pages/dadada';
+import Autores from '../pages/autores';
+import Livros from '../pages/livros';
+import NotFound from '../pages/not-found';
 
 const ROTAS = () => {
     return (
@@ -10,11 +15,11 @@ const ROTAS = () => {
             <Switch>
                 <Route path='/' exact component={HomePage} />
                 <Route path='/sobre' component={SobrePage}/>
-                <Route path='/jocimar' component={SobrePage}/>
-                <Route path='/dadada' component={SobrePage}/>
-                <Route path='/autores' component={SobrePage}/>
-                <Route path='/livros' component={SobrePage}/>
-                <Route component={SobrePage}/>
+                <Route path='/jocimar' component={Jocimar}/>
+                <Route path='/dadada' component={Dadada}/>
+                <Route path='/autores' component={Autores}/>
+                <Route path='/livros' component={Livros}/>
+                <Route component={NotFound}/>
             </Switch>
         </BrowserRouter>
     )

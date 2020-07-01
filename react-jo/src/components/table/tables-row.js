@@ -7,6 +7,7 @@ const TableRow = props=>{
         <tbody>
             { dadosTabela.map((linha, index) => (
                 <tr key={index}>
+                    >Condicionar as colunas que eu quero renderizar e condicionar os botões. 
                     <td>{linha.nome}</td>
                     <td>{linha.livro}</td>
                     <td>{linha.preco}</td>
