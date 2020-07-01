@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return(
         <nav>
         <div className="nav-wrapper">
-          <a href="/" className="brand-logo">Logo</a>
+          <Link to="/" className="brand-logo">Logo</Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li><Link to="/">Autores</Link></li>
+            <li><Link to="/">Livros</Link></li>
+            <li><Link to="/">Jocimar</Link></li>
+            <li><Link to="/">DADADA</Link></li>
+            <li><Link to="/sobre">Sobre Link gente</Link></li>
           </ul>
         </div>
       </nav>

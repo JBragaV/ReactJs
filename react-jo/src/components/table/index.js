@@ -9,10 +9,10 @@ import MeuPopUp from '../../shared/popup';
 class Tabela extends Component{
     state = {
         dadosTabela: [
-          {nome: "Jocimar", livro: "Muito forte na Dadada, bruto na Dadada", preco: "todos"},
-          {nome: "Dadada", livro: "Pro jo muito", preco:"De graça"},
-          {nome: "Manuela", livro: "Feminino", preco: 951},
-          {nome: "Jorge Luiz", livro: "Masculino", preco: 9999},
+          {nome: "Jocimar", livro: "Dadada", preco: "todos"},
+          {nome: "Dadada", livro: "Jocimar", preco:"De graça"},
+          {nome: "Manuela", livro: "Coisinha linda", preco: 951},
+          {nome: "Jorge Luiz", livro: "The best of the universe", preco: 9999},
         ],
       }
     
