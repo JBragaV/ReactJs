@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import Header from '../../components/header';
 import TablePage from '../tabela';
 
-const HomePage = () => {
+const HomePage = () => {    
     return(
         <Fragment>
             <Header />

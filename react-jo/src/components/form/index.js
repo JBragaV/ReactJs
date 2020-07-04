@@ -25,7 +25,6 @@ const Formulario = props =>{
                 livro: '',
                 preco: ''
             })
-            MeuPopUp.exibeMensagem('success', "Dados cadastrados com sucesso!!!")
         }else{
             valid.errosArray().forEach(erro => {
                 MeuPopUp.exibeMensagem('error', erro.mensagem)

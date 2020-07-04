@@ -1,26 +1,42 @@
 import React from 'react';
 
-const TableRow = props=>{
+const MontaTabela = props=>{
     const dadosTabela  = props.linhas;
-
+    const colunas = props.colunas;
+    const acao = props.acao;
     return(
-        <tbody>
-            { dadosTabela.map((linha, index) => (
-                <tr key={index}>
-                    >Condicionar as colunas que eu quero renderizar e condicionar os botões. 
-                    <td>{linha.nome}</td>
-                    <td>{linha.livro}</td>
-                    <td>{linha.preco}</td>
-                    <td>
-                        <button>Atualizar</button>
-                        <button onClick = {()=>{props.apaga(index)} }>Deletar</button>
-                    </td>
-                </tr>
-                
-            ))}
-        </tbody>
+        <>
+            <table className='centered highlight'>
+                <thead>
+                    <tr>
+                        { colunas.map((coluna, index) => (
+                            <td key={index}>{coluna}</td>
+                        ))}
+                        {acao && 
+                            <td>Ações</td>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    { dadosTabela.map(linha => (
+                        <tr key={linha.id}>
+                            <td>{linha.nome}</td>
+                            <td>{linha.livro}</td>
+                            <td>{linha.preco}</td>
+                            {acao &&
+                                <td>
+                                    <button>Atualizar</button>
+                                    <button onClick = {()=>{props.apaga(linha.id)} }>Deletar</button>
+                                </td>
+                            }
+                        </tr>
+                        
+                    ))}
+                </tbody>
+            </table>
+        </>
     );
 }
 
-export default TableRow;
+export default MontaTabela;
 
