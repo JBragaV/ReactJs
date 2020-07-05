@@ -22,40 +22,39 @@ class Tabela extends Component{
     const listaAtual = dadosTabela.filter(autor=>{
         return id !== autor.id;
     });
-    apiService.deletar(id).then(res => apiService.tratarErro(res))
-        .then(res => {
-            if(res.message === 'deleted'){
-                this.setState({dadosTabela: [...listaAtual]})
-                MeuPopUp.exibeMensagem("delete", "Dados apagado com sucesso!!!");        
-            }
+    apiService.deletar(id)
+        .then(() => {
+            this.setState({dadosTabela: [...listaAtual]})
+            MeuPopUp.exibeMensagem("delete", "Dados apagado com sucesso!!!");        
         }).catch(err => {
-            MeuPopUp.exibeMensagem("erro", "Erro ao tentar deletar dados, tente mais tarde!!!");        
+            console.log(err);
+            MeuPopUp.exibeMensagem("error", err.message);        
         })
     }
 
     add = autor=>{
         apiService.adicionar(JSON.stringify(autor))
-        .then(resp => apiService.tratarErro(resp))
         .then(res => {
-            if(res.message === 'success'){
+            console.log();
                 this.setState({
-                    dadosTabela: [...this.state.dadosTabela, res.dada]
+                    dadosTabela: [...this.state.dadosTabela, res.data]
                 });
                 MeuPopUp.exibeMensagem('success', "Dados cadastrados com sucesso!!!");
-            }
         })
         .catch(err => {
             console.log(err);
-            MeuPopUp.exibeMensagem("erro", "Erro ao tentar adicionar dados, tente mais tarde!!!;Continuar daqui        
+            MeuPopUp.exibeMensagem("error", err.message);        
         })
     }
 
      componentDidMount(){
         apiService.listar()
-            .then(dados => this.setState({dadosTabela: [...this.state.dadosTabela, ...dados.data]}))
-            .catch(erro =>{
-                console.log("Cheguei agora!!!")
-                MeuPopUp.exibeMensagem("erro", "erro");
+            .then(dados => {
+                this.setState({dadosTabela: [...this.state.dadosTabela, ...dados.data]});
+            })
+            .catch(err =>{
+                console.log("Deu merda na classe tabela!!!")
+                MeuPopUp.exibeMensagem("error", err.message);
             })
     }
 

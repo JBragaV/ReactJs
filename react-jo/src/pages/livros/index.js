@@ -1,29 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
 import Header from '../../components/header';
-import GenericTable from '../../components/table/generic-table'
+import GenericTable from '../../components/table/generic-table';
+
+import MeuPopUp from '../../shared/popup';
 
 import apiService from '../../service/api-service';
 
+class Livros extends Component{
 
-const Livros = () => {
+    constructor(props){
+        super(props);
+        this.state ={
+            dadosTabela: []
+        }
+    }
 
-    const [dadosTabela, setDadosTabela] = useState([]);
-    useEffect(()=>{
+    componentDidMount(){
         apiService.listaLivros()
-            .then(resp => resp.data)
-            .then(livros => {
-                setDadosTabela([...dadosTabela, ...livros])
+            .then(res => {
+                console.log(res.data);
+                this.setState({dadosTabela: [...res.data]})
             })
-    }, []);
-    
-    return (
-        <>
-            <Header />
-            <h2>Página dos Livros</h2>
-            <GenericTable classe={"container mb-10"} linhas={dadosTabela} colunas={['livro']} />
-        </>
-    )
+            .catch(erro => {
+                MeuPopUp.exibeMensagem('error', "Erro ao buscar os livros no banco de dados, tente mais tarde!!!");
+                console.log(erro);
+
+            });
+    }
+    render(){
+        return (
+            <>
+                <Header />
+                <h2>Página dos Livros</h2>
+                <GenericTable classe={"container mb-10"} linhas={this.state.dadosTabela} colunas={['livro']} />
+            </>
+        )
+    }
 }
 
 export default Livros;
