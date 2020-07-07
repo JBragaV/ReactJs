@@ -15,6 +15,11 @@ class Tabela extends Component{
         this.state = {
             dadosTabela: [],
         }
+
+        this.constantesTabela = {
+            cabecalho: ['Autores', 'Livro', 'Preço'],
+            colunas: ['nome', 'livro', 'preco']
+        }
     }
     
     apagaLinha = id =>{
@@ -61,7 +66,13 @@ class Tabela extends Component{
     render(){
         return (
             <>
-                <MontaTabela linhas = {this.state.dadosTabela} apaga = { this.apagaLinha } colunas={['nome', 'Livro', 'Preço']} acao={true}/>
+                <MontaTabela 
+                    linhas = {this.state.dadosTabela} 
+                    tableHead = {this.constantesTabela.cabecalho}
+                    apaga = { this.apagaLinha } 
+                    colunas={this.constantesTabela.colunas} 
+                    acao={true}
+                />
                 <Formulario adcionar={this.add}/>
             </>
         )

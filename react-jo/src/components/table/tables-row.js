@@ -1,40 +1,69 @@
 import React from 'react';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+
 const MontaTabela = props=>{
+    const cabecalho = props.tableHead;
     const dadosTabela  = props.linhas;
     const colunas = props.colunas;
     const acao = props.acao;
+
+    const CellRemove = ({acao, id}) =>{
+        if(!acao) return null;
+
+        if(!id) return (<TableCell align="center">Ações</TableCell>);
+
+        return (
+            <TableCell align="center">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<CloudUploadIcon />}>
+                    Atualizar
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<DeleteIcon />}
+                    onClick = {()=>{props.apaga(id)} }>
+                        Deletar
+                </Button>
+            </TableCell>
+        )
+    }
+
     return(
-        <>
-            <table className='centered highlight'>
-                <thead>
-                    <tr>
-                        { colunas.map((coluna, index) => (
-                            <td key={index}>{coluna}</td>
+        <TableContainer>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        { cabecalho.map((coluna, index) => (
+                            <TableCell key={index} align="center">{coluna}</TableCell>
                         ))}
-                        {acao && 
-                            <td>Ações</td>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
+                        <CellRemove acao = {acao}/>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     { dadosTabela.map(linha => (
-                        <tr key={linha.id}>
-                            <td>{linha.nome}</td>
-                            <td>{linha.livro}</td>
-                            <td>{linha.preco}</td>
-                            {acao &&
-                                <td>
-                                    <button>Atualizar</button>
-                                    <button onClick = {()=>{props.apaga(linha.id)} }>Deletar</button>
-                                </td>
-                            }
-                        </tr>
-                        
+                        <TableRow key={linha.id}>
+                            {colunas.map((coluna, index) => (
+                                <TableCell key={index} align="center">{linha[coluna]}</TableCell>
+                            ))}
+                            <CellRemove acao = {acao} id = {linha.id}/>  
+                        </TableRow>  
                     ))}
-                </tbody>
-            </table>
-        </>
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
 

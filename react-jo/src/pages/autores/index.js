@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import Header from '../../components/header';
-import GenericTable from '../../components/table/generic-table';
+import MontaTabela from '../../components/table/tables-row'
 
 import MeuPopUp from '../../shared/popup';
 
@@ -12,7 +12,11 @@ class Autores extends Component {
         super(props);
         this.state = {
             dadosTabela: []
-        } 
+        }
+        this.constantesTabela = {
+            cabecalho: ['Autores'],
+            colunas: ['nome']
+        }
     }
     
 
@@ -33,12 +37,18 @@ class Autores extends Component {
         return (
             <Fragment>
                 <Header />
-                <h2>Página dos Autores</h2>
-                <GenericTable classe={"container mb-10"} linhas={this.state.dadosTabela} colunas={['nome']}/>
+                    <div className="container mb-10">
+                        <h2>Página dos Autores</h2>
+                        <MontaTabela 
+                            linhas = {this.state.dadosTabela} 
+                            tableHead = {this.constantesTabela.cabecalho}
+                            colunas = {this.constantesTabela.colunas} 
+                            acao={false}
+                        />
+                    </div>
             </Fragment>
         )
     }
-
 }
 
 export default Autores;

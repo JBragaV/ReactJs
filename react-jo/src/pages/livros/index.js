@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Header from '../../components/header';
-import GenericTable from '../../components/table/generic-table';
+import MontaTabela from '../../components/table/tables-row';
 
 import MeuPopUp from '../../shared/popup';
 
@@ -14,12 +14,16 @@ class Livros extends Component{
         this.state ={
             dadosTabela: []
         }
+
+        this.constantesTabela = {
+            cabecalho: ['Livros'],
+            colunas: ['livro']
+        }
     }
 
     componentDidMount(){
         apiService.listaLivros()
             .then(res => {
-                console.log(res.data);
                 this.setState({dadosTabela: [...res.data]})
             })
             .catch(erro => {
@@ -29,11 +33,14 @@ class Livros extends Component{
             });
     }
     render(){
+
         return (
             <>
                 <Header />
-                <h2>Página dos Livros</h2>
-                <GenericTable classe={"container mb-10"} linhas={this.state.dadosTabela} colunas={['livro']} />
+                <div className="container mb-10">
+                    <h2>Página dos Livros</h2>
+                    <MontaTabela linhas = {this.state.dadosTabela} tableHead={this.constantesTabela.cabecalho} colunas={this.constantesTabela.colunas} acao={false}/>
+                </div>
             </>
         )
     }
