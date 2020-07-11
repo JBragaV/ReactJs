@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import Grid from '@material-ui/core/Grid';
+
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -24,19 +26,25 @@ const MontaTabela = props=>{
 
         return (
             <TableCell align="center">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<CloudUploadIcon />}>
-                    Atualizar
-                </Button>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    startIcon={<DeleteIcon />}
-                    onClick = {()=>{props.apaga(id)} }>
-                        Deletar
-                </Button>
+                <Grid container justify="space-evenly" alignItems="center">
+                    <Grid item>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<CloudUploadIcon />}>
+                            Atualizar
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            startIcon={<DeleteIcon />}
+                            onClick = {()=>{props.apaga(id)} }>
+                                Deletar
+                        </Button>
+                    </Grid>
+                </Grid>
             </TableCell>
         )
     }

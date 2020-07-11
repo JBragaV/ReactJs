@@ -23,18 +23,18 @@ class Tabela extends Component{
     }
     
     apagaLinha = id =>{
-    const { dadosTabela } = this.state;
-    const listaAtual = dadosTabela.filter(autor=>{
-        return id !== autor.id;
-    });
-    apiService.deletar(id)
-        .then(() => {
-            this.setState({dadosTabela: [...listaAtual]})
-            MeuPopUp.exibeMensagem("delete", "Dados apagado com sucesso!!!");        
-        }).catch(err => {
-            console.log(err);
-            MeuPopUp.exibeMensagem("error", err.message);        
-        })
+        const { dadosTabela } = this.state;
+        const listaAtual = dadosTabela.filter(autor=>{
+            return id !== autor.id;
+        });
+        apiService.deletar(id)
+            .then(() => {
+                this.setState({dadosTabela: [...listaAtual]})
+                MeuPopUp.exibeMensagem("delete", "Dados apagado com sucesso!!!");        
+            }).catch(err => {
+                console.log(err);
+                MeuPopUp.exibeMensagem("error", err.message);        
+            })
     }
 
     add = autor=>{
@@ -66,6 +66,7 @@ class Tabela extends Component{
     render(){
         return (
             <>
+                <Formulario adcionar={this.add}/>
                 <MontaTabela 
                     linhas = {this.state.dadosTabela} 
                     tableHead = {this.constantesTabela.cabecalho}
@@ -73,7 +74,6 @@ class Tabela extends Component{
                     colunas={this.constantesTabela.colunas} 
                     acao={true}
                 />
-                <Formulario adcionar={this.add}/>
             </>
         )
     }
