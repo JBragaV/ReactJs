@@ -7,6 +7,7 @@ import Formulario from '../form';
 import MeuPopUp from '../../shared/popup';
 import apiService from '../../service/api-service';
 
+
 class Tabela extends Component{
 
     constructor(props){
@@ -44,6 +45,7 @@ class Tabela extends Component{
                 this.setState({
                     dadosTabela: [...this.state.dadosTabela, res.data]
                 });
+                //MeuToast(true);
                 MeuPopUp.exibeMensagem('success', "Dados cadastrados com sucesso!!!");
         })
         .catch(err => {
