@@ -1,7 +1,7 @@
-const API_BASE = 'http://localhost:8000/api/autor';
+const API_BASE = 'http://192.168.109.103:8000/api/autor';
 
-const consomeApi = (erroMsg, param = '', method = 'GET', body) =>{
-    return fetch(`${API_BASE}${param}`, {
+const consomeApi = (erroMsg, param = '', id = '',method = 'GET', body) =>{
+    return fetch(`${API_BASE}${param}${id}`, {
         method, 
         headers: {'content-type': 'application/json'},
         body
